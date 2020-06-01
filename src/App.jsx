@@ -2,95 +2,54 @@ import React, { Component } from 'react'
 
 class App extends Component {
 
-    constructor(props) {
-        super(props)
-        this.handleClick = this.handleClick.bind(this)
-    }
-
-    handleClick() {
-        console.log(this)
+    handleClick = (e, msg) => {
+        console.log(msg)
+        console.log(e.target)
     }
 
     render() {
         return (
             <>
                 <h1>Events</h1>
-                {/*  <button onClick={this.handleClick}>Click me!</button> */}
-                {/* <buttononClick={()=>this.handleClick()}>Clickme!</button> */}
-                {/* <button onClick={this.handleClick.bind(this)}>Click me!</button> */}
-                <button onClick={this.handleClick}>Click me!</button>
+                <button onClick={(e) => this.handleClick(e, 'Hello')}>Click me!</button>
             </>
         )
     }
 }
-
 
 export default App;
 
 
 
 /*
-Formas de enlazar eventos (existen cuatro)
+Paso de parametros con arrow function:
 
-La forma mas recomedada es utilizar una arrow function pero de no ser posible, la mejor solucion es realizar el bind de la funcion con la clase (Class App) dentro del constructor.
+Como enviar parametros cuando ejecutamos un evento (con arrow function)
 
-
-
-1. Arrow function (recomendada!)
-
-handleClick = () => {
-    console.log(this)
-}
+Cuando ejecutamos un evento de esta forma automaticamente y sin que podamos evitarlo se va a enviar el evento.
+Podemos no recogerlo pero el evento se esta enviando.
 
 <button onClick={this.handleClick}>Click me!</button>
 
-El contexto que es lo que significa 'this' (el contexto de la funcion) es 'Class App'.
-Estamos haciendo referencia a la clase en la cual nos encontramos.
+Si queremos pasar mas parametros u otro parametro en lugar del evento (e) entonces necesitamos que la funcion sea llamda de la siguiente manera:
 
-----------
-
-2. Como bindear (como hacer el enlace) entre las funciones cuando handleClick no tiene el contexto que debe. 
-
-handleClick() {
-    console.log(this)
+handleClick = (msg) => {
+    console.log(msg)
 }
 
-<button onClick={() => this.handleClick()}>Click me!</button>
+<button onClick={() => this.handleClick(e, 'Hello')}>Click me!</button>
 
 
-----------
+Si ademas necesitamos pasar el evento:
 
-3. Bind
-
-Bind es un metodo que modifica el contexto de la funcion que estamos ejecutando.
-En el caso del boton el contexto de 'this' si es 'Class App' por lo tanto estamos llamando a la funcion y estamos enlazando el contexto del boton con la clase.
-
-handleClick() {
-    console.log(this)
+handleClick = (e, msg) => {
+    console.log(msg)
+    console.log(e.target)
 }
 
-<button onClick={this.handleClick.bind(this)}>Click me!</button>
+<button onClick={(e) => this.handleClick(e, 'Hello')}>Click me!</button>
 
+'e' es el evento pero se esta ejecutando a traves de una funcion anonima por lo tanto el parametro de evento lo tiene que recoger la funcion que esta ejecutando el evento.
 
-----------
-
-4. Realizar el bind de la funcion con la clase (Class App) dentro del constructor (mejor opcion!)
-
-<button onClick={this.handleClick}>Click me!</button>
-
-constructor(props) {
-    super(props)
-    this.handleClick = this.handleClick.bind(this)
-}
-
-Escribimos el nombre la funcion que queremos enlazar (this.handleClick) y lo igualamos con 'this.handleClick.bind(this)'.
-De esta forma le estamos diciendo que el contexto de la funcion va a ser igual a la misma funcion con el contexto correcto.
-De esta forma en el boton podriamos usar la funcion utilizando 'onClick={this.handleClick}'
-
-
-----------
-
-Bind
-For a given function, creates a bound function that has the same body as the original function. The this object of the bound function is associated with the specified object, and has the specified initial parameters.
 
 */
