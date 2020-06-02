@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from 'react';
-import Button from './components/Button'
+//import Button from './components/Button'
 
 class App extends Component {
 
     handleClick = (e) => {
-        console.log(e.target)
+        console.log(e)
+        console.log(e.nativeEvent)
     }
 
     render() {
@@ -12,7 +13,7 @@ class App extends Component {
             <Fragment>
                 <h1>Events</h1>
                 {/* <button onClick={this.handleClick}>Click me!</button> */}
-                <Button text="Click me!" />
+                <button onClick={this.handleClick}>Click me!</button>
             </Fragment>
         )
     }
@@ -23,14 +24,12 @@ export default App;
 
 
 /*
-Eventos en componentes funcionales
+Eventos sintéticos (SyntheticEvent)
 
-Para utilizar eventos en un componente que no tiene estado o que no es una clase (Class component) lo que tenemos que hacer es crear el evento (usando una funcion) dentro del componente.
+React controla los eventos para que funcionen en todos los navegadores.
+React crea un evento sintetico con la finalidad que el evento funcione en todos los navegadores; no es el evento original de JS.
 
-Para utilizar handleClick tenemos que declararlo (const handleClick) y de esta forma tenemos una función dentro de otra función.
-
-Una vez que ya tenemos la funcion handleClick declarada en nuestra función solo tenemos que llamarla.
-
+Se utilizan casi todos los eventos nativos de JS que podemos necesitar pero de necesitar algun evento muy especifico podemos acceder con 'e.nativeEvent'. 
 
 
 */
