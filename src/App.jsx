@@ -1,19 +1,19 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react';
+import Button from './components/Button'
 
 class App extends Component {
 
-    handleClick(msg, msg2, e) {
-        console.log(e)
-        console.log(msg)
-        console.log(msg2)
+    handleClick = (e) => {
+        console.log(e.target)
     }
 
     render() {
         return (
-            <>
+            <Fragment>
                 <h1>Events</h1>
-                <button onClick={this.handleClick.bind(this, 'hello', 'world')}>Click me!</button>
-            </>
+                {/* <button onClick={this.handleClick}>Click me!</button> */}
+                <Button text="Click me" onEventClick={this.handleClick} />
+            </Fragment>
         )
     }
 }
@@ -23,19 +23,24 @@ export default App;
 
 
 /*
-Paso de parametros sin arrow function:
+Eventos personalizados
 
-<button onClick={this.handleClick.bind(this, 'hello', 'world')}>Click me!</button>
+El evento onClick={this.handleClick} es una prop que pertenece a las etiquetas de JSX.
+<Button /> no es un etiqueta JSX; es un componente.
 
-La forma de pasar parametros si no contamos con arrow functions es utilizar el metodo 'bind' y pasar como primer parametro 'this', luego podemos pasar uno o mas parametros.
+Para que funcione debemos crear un evento personalizado.
 
+<Button text="Click me" onEventClick={this.handleClick} />
 
-handleClick(msg, msg2, e) {
-    console.log(e)
-    console.log(msg)
-    console.log(msg2)
-}
+Dentro de nuestro componente pasamos el 'onEventClick' y dentro de la etiqueta <Button> donde si tenemos el evento 'onClick' le decimos que cuando hagan click en ese boton ejecute la prop que le pasamos (onEventClick).
 
-En el 'handle' debemos pasar los parametros pero siempre el evento (e) debe ser el ultimo.
+const Button = ({ text, onEventClick }) => (
+    <Button onClick={onEventClick}> {text} </Button>
+)
+
+Cuando pasamos eventos entre componentes NO se pone el evento en el componente.
+'OnClick' son eventos que hay que aplicar a etiquetas JSX.
+Los componentes necesitan eventos personalizados. 
+
 
 */
