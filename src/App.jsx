@@ -12,7 +12,7 @@ class App extends Component {
             <Fragment>
                 <h1>Events</h1>
                 {/* <button onClick={this.handleClick}>Click me!</button> */}
-                <Button text="Click me" onEventClick={this.handleClick} />
+                <Button text="Click me!" />
             </Fragment>
         )
     }
@@ -23,24 +23,14 @@ export default App;
 
 
 /*
-Eventos personalizados
+Eventos en componentes funcionales
 
-El evento onClick={this.handleClick} es una prop que pertenece a las etiquetas de JSX.
-<Button /> no es un etiqueta JSX; es un componente.
+Para utilizar eventos en un componente que no tiene estado o que no es una clase (Class component) lo que tenemos que hacer es crear el evento (usando una funcion) dentro del componente.
 
-Para que funcione debemos crear un evento personalizado.
+Para utilizar handleClick tenemos que declararlo (const handleClick) y de esta forma tenemos una función dentro de otra función.
 
-<Button text="Click me" onEventClick={this.handleClick} />
+Una vez que ya tenemos la funcion handleClick declarada en nuestra función solo tenemos que llamarla.
 
-Dentro de nuestro componente pasamos el 'onEventClick' y dentro de la etiqueta <Button> donde si tenemos el evento 'onClick' le decimos que cuando hagan click en ese boton ejecute la prop que le pasamos (onEventClick).
-
-const Button = ({ text, onEventClick }) => (
-    <Button onClick={onEventClick}> {text} </Button>
-)
-
-Cuando pasamos eventos entre componentes NO se pone el evento en el componente.
-'OnClick' son eventos que hay que aplicar a etiquetas JSX.
-Los componentes necesitan eventos personalizados. 
 
 
 */
